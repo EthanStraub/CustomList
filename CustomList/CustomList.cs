@@ -58,12 +58,12 @@ namespace CustomListProgram
 
             arr[count] = default(T);
 
+            
+            count--;
             if (count == (capacity / 2))
             {
                 Shrink();
             }
-            count--;
-            
         }
 
         public void grow()
@@ -81,15 +81,15 @@ namespace CustomListProgram
 
         public void Shrink()
         {
-            capacity = capacity / 2;
-
             T[] oldArr = arr;
-            arr = new T[capacity];
+            arr = new T[capacity * 2];
 
             for (int i = 0; i < capacity; i++)
             {
                 arr[i] = oldArr[i];
             }
+
+            capacity = capacity / 2;
         }
     }
 }
