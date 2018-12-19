@@ -32,8 +32,8 @@ namespace CustomListTest
         [TestMethod]
         public void Add_Object_AddObjectToList()
         {
-            ExampleClass exampleObj = new ExampleClass(1);
-            CustomList<ExampleClass> objList = new CustomList<ExampleClass>();
+            ExampleClassTest exampleObj = new ExampleClassTest(1);
+            CustomList<ExampleClassTest> objList = new CustomList<ExampleClassTest>();
 
             objList.Add(exampleObj);
 
@@ -133,13 +133,13 @@ namespace CustomListTest
         [TestMethod]
         public void Remove_Object_RemoveObjectFromList()
         {
-            ExampleClass exampleObj1 = new ExampleClass(1);
-            ExampleClass exampleObj2 = new ExampleClass(2);
-            ExampleClass exampleObj3 = new ExampleClass(3);
-            ExampleClass exampleObj4 = new ExampleClass(4);
-            ExampleClass exampleObj5 = new ExampleClass(5);
+            ExampleClassTest exampleObj1 = new ExampleClassTest(1);
+            ExampleClassTest exampleObj2 = new ExampleClassTest(2);
+            ExampleClassTest exampleObj3 = new ExampleClassTest(3);
+            ExampleClassTest exampleObj4 = new ExampleClassTest(4);
+            ExampleClassTest exampleObj5 = new ExampleClassTest(5);
 
-            CustomList<ExampleClass> objList = new CustomList<ExampleClass>();
+            CustomList<ExampleClassTest> objList = new CustomList<ExampleClassTest>();
 
             objList.Add(exampleObj1);
             objList.Add(exampleObj2);
@@ -150,6 +150,141 @@ namespace CustomListTest
             objList.Remove(exampleObj3);
 
             Assert.AreNotEqual(objList[2].ExampleValue, 3);
+        }
+
+        [TestMethod]
+        public void ToString_Integers_ConvertIntegersToString()
+        {
+            int exampleInt = 1234;
+            string convertedInt;
+            CustomList<int> exampleList = new CustomList<int>();
+
+            exampleList.Add(exampleInt);
+
+            convertedInt = exampleList.ToString();
+
+            Assert.AreEqual(convertedInt, "1234");
+        }
+
+        [TestMethod]
+        public void ToString_Objects_ConvertObjects()
+        {
+            string convertedObjList;
+
+            ExampleClassTest exampleObj1 = new ExampleClassTest(10);
+            ExampleClassTest exampleObj2 = new ExampleClassTest(20);
+            ExampleClassTest exampleObj3 = new ExampleClassTest(30);
+            ExampleClassTest exampleObj4 = new ExampleClassTest(40);
+            ExampleClassTest exampleObj5 = new ExampleClassTest(50);
+
+            CustomList<ExampleClassTest> objList = new CustomList<ExampleClassTest>();
+
+            objList.Add(exampleObj1);
+            objList.Add(exampleObj2);
+            objList.Add(exampleObj3);
+            objList.Add(exampleObj4);
+            objList.Add(exampleObj5);
+
+            objList.Remove(exampleObj3);
+
+            convertedObjList = objList.ToString();
+
+            Assert.AreEqual(convertedObjList, "CustomListTest.ExampleClassTest: 10, CustomListTest.ExampleClassTest: 20, CustomListTest.ExampleClassTest: 40, CustomListTest.ExampleClassTest: 50");
+        }
+
+        [TestMethod]
+        public void OverloadPlus_TwoStringLists_AddListsTogether()
+        {
+            string dualListString;
+            CustomList<string> dualList;
+
+            CustomList<string> testStrings1 = new CustomList<string>();
+            CustomList<string> testStrings2 = new CustomList<string>();
+
+            testStrings1.Add("Hello");
+            testStrings1.Add("World");
+
+            testStrings2.Add("This");
+            testStrings2.Add("should");
+            testStrings2.Add("work");
+
+            dualList = testStrings1 + testStrings2;
+            dualListString = dualList.ToString();
+
+            Assert.AreEqual(dualListString, "Hello, World, This, should, work");
+        }
+
+        [TestMethod]
+        public void OverloadPlus_TwoIntLists_AddListsTogether()
+        {
+            string dualListString;
+            CustomList<int> dualList;
+
+            CustomList<int> testInts1 = new CustomList<int>();
+            CustomList<int> testInts2 = new CustomList<int>();
+
+            testInts1.Add(1);
+            testInts1.Add(3);
+
+            testInts2.Add(5);
+            testInts2.Add(6);
+            testInts2.Add(7);
+
+            dualList = testInts1 + testInts2;
+            dualListString = dualList.ToString();
+
+            Assert.AreEqual(dualListString, "1, 3, 5, 6, 7");
+        }
+
+        [TestMethod]
+        public void OverloadPlus_TwoObjLists_AddListsTogether()
+        {
+            string dualListString;
+            CustomList<ExampleClassTest> dualList;
+
+            CustomList<ExampleClassTest> testObjs1 = new CustomList<ExampleClassTest>();
+            CustomList<ExampleClassTest> testObjs2 = new CustomList<ExampleClassTest>();
+
+            ExampleClassTest exampleObj1 = new ExampleClassTest(10);
+            ExampleClassTest exampleObj2 = new ExampleClassTest(20);
+
+            ExampleClassTest exampleObj3 = new ExampleClassTest(30);
+            ExampleClassTest exampleObj4 = new ExampleClassTest(40);
+            ExampleClassTest exampleObj5 = new ExampleClassTest(50);
+
+            testObjs1.Add(exampleObj1);
+            testObjs1.Add(exampleObj2);
+
+            testObjs2.Add(exampleObj3);
+            testObjs2.Add(exampleObj4);
+            testObjs2.Add(exampleObj5);
+
+            dualList = testObjs1 + testObjs2;
+            dualListString = dualList.ToString();
+
+            Assert.AreEqual(dualListString, "CustomListTest.ExampleClassTest: 10, CustomListTest.ExampleClassTest: 20, CustomListTest.ExampleClassTest: 30, CustomListTest.ExampleClassTest: 40, CustomListTest.ExampleClassTest: 50");
+        }
+
+        [TestMethod]
+        public void Zip_TwoIntLists_ZipListsTogether()
+        {
+            string zipListString;
+
+            CustomList<int> testInts1 = new CustomList<int>();
+            CustomList<int> testInts2 = new CustomList<int>();
+
+            testInts1.Add(2);
+            testInts1.Add(6);
+            testInts1.Add(4);
+
+            testInts2.Add(9);
+            testInts2.Add(3);
+            testInts2.Add(5);
+
+            testInts1.Zip(testInts2);
+
+            zipListString = testInts1.ToString();
+            Assert.AreEqual(zipListString, "2, 9, 6, 3, 4, 5");
         }
     }
 }

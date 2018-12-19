@@ -31,7 +31,7 @@ namespace CustomListProgram
         {
             if (count == capacity)
             {
-                grow();
+                Grow();
             }
             arr[count] = item;
             count++;
@@ -66,7 +66,18 @@ namespace CustomListProgram
             }
         }
 
-        public void grow()
+        public override string ToString()
+        {
+            string charSet = "";
+            for (int i = 0; i < count - 1; i++)
+            {
+                charSet = charSet + (arr[i].ToString() + ", ");
+            }
+            charSet += arr[count-1];
+            return charSet;
+        }
+
+        public void Grow()
         {
             T[] oldArr = arr;
             arr = new T[capacity * 2];
@@ -90,6 +101,30 @@ namespace CustomListProgram
             }
 
             capacity = capacity / 2;
+        }
+
+        public static CustomList<T> operator +(CustomList<T> List1, CustomList<T> List2)
+        {
+            CustomList<T> concatList = new CustomList<T>();
+            concatList = List1;
+            for (int i = 0; i < List2.count; i++)
+            {
+                concatList.Add(List2[i]);
+            }
+            return concatList;
+        }
+
+        public void Zip(CustomList<T> secondArr)
+        {
+
+            T[] oldArr = arr;
+            Grow();
+
+            for (int i = 0; i < count; i++)
+            {
+                arr[(i*2)] = oldArr[i];
+                arr[(i*2)+1] = secondArr[i];
+            }
         }
     }
 }

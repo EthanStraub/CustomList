@@ -50,7 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomListTest.cs" />
-    <Compile Include="ExampleClass.cs" />
+    <Compile Include="ExampleClassTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
