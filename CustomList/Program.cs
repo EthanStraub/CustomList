@@ -11,23 +11,17 @@ namespace CustomListProgram
         static void Main(string[] args)
         {
 
-            CustomList<int> testInt1 = new CustomList<int>();
-            CustomList<int> testInt2 = new CustomList<int>();
 
+            ExampleClass Example1 = new ExampleClass(1, "HELLO");
+            ExampleClass Example2 = new ExampleClass(2, "WORLD");
 
-            //CustomList<ExampleClass> objList = new CustomList<ExampleClass>();
+            CustomList<ExampleClass> exampleList1 = new CustomList<ExampleClass>();
+            CustomList<ExampleClass> exampleList2 = new CustomList<ExampleClass>();
 
-            testInt1.Add(10);
-            testInt1.Add(30);
-            testInt1.Add(50);
-
-            testInt2.Add(20);
-            testInt2.Add(40);
-            testInt2.Add(60);
-
-            testInt1.Zip(testInt2);
-
-            Console.WriteLine(testInt1);
+            exampleList1.Add(Example1);
+            exampleList2.Add(Example2);
+            
+            Console.WriteLine(exampleList1.Zip(exampleList2));
 
             Console.ReadLine();
         }

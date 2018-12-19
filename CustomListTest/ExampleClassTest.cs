@@ -8,17 +8,18 @@ namespace CustomListTest
 {
     public class ExampleClassTest
     {
-        private int exampleValue;
-        public int ExampleValue { get { return exampleValue; } set { exampleValue = value; } }
+        private int exampleInt;
 
-        public ExampleClassTest(int ExampleValue)
+        public int ExampleInt { get { return exampleInt; } set { exampleInt = value; } }
+
+        public ExampleClassTest(int ExampleInt)
         {
-            this.ExampleValue = ExampleValue;
+            this.ExampleInt = ExampleInt;
         }
 
         public override string ToString()
         {
-            return base.ToString() + ": " + exampleValue.ToString();
+            return base.ToString() + ": " + exampleInt.ToString();
         }
     }
 }

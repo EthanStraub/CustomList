@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,17 +9,21 @@ namespace CustomListProgram
 {
     public class ExampleClass
     {
-        private int exampleValue;
-        public int ExampleValue { get { return exampleValue; } set { exampleValue = value; } }
+        private int exampleInt;
+        private string exampleString;
 
-        public ExampleClass(int ExampleValue)
+        public int ExampleInt { get { return exampleInt; } set { exampleInt = value; } }
+        public string ExampleString { get { return exampleString; } set { exampleString = value; } }
+
+        public ExampleClass(int ExampleInt, string ExampleString)
         {
-            this.ExampleValue = ExampleValue;
+            this.ExampleInt = ExampleInt;
+            this.ExampleString = ExampleString;
         }
 
         public override string ToString()
         {
-            return base.ToString() + ": " + exampleValue.ToString();
-        }
+            return base.ToString() + ": " + exampleInt.ToString() + ", " + exampleString;
+        } 
     }
 }

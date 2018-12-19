@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CustomListProgram
 {
-    public class CustomList<T>
+    public class CustomList<T> : IEnumerable
     {
         private int count;
         private int capacity;
@@ -22,7 +23,6 @@ namespace CustomListProgram
             capacity = 4;
             arr = new T[capacity];
         }
-
 
         // Define the indexer to allow client code to use [] notation.
         public T this[int i] => arr[i];
@@ -114,16 +114,50 @@ namespace CustomListProgram
             return concatList;
         }
 
-        public void Zip(CustomList<T> secondArr)
+        public CustomList<T> Zip(CustomList<T> secondArr)
         {
+            CustomList<T> newArr = new CustomList<T>();
 
-            T[] oldArr = arr;
-            Grow();
+            if (count == secondArr.count)
+            {
+                for (int i = 0; i < count; i++)
+                {
+                    newArr.Add(arr[i]);
+                    newArr.Add(secondArr[i]);
+                }
+            }
+            else if (count < secondArr.count)
+            {
+                for (int i = 0; i < count; i++)
+                {
+                    newArr.Add(arr[i]);
+                    newArr.Add(secondArr[i]);
+                }
+                for (int i = count; i < secondArr.count; i++)
+                {
+                    newArr.Add(secondArr[i]);
+                }
+            }
+            else if (count > secondArr.count)
+            {
+                for (int i = 0; i < secondArr.count; i++)
+                {
+                    newArr.Add(arr[i]);
+                    newArr.Add(secondArr[i]);
+                }
+                for (int i = secondArr.count; i < count; i++)
+                {
+                    newArr.Add(arr[i]);
+                }
+            }
+            return newArr;
+        }
 
+        public IEnumerator GetEnumerator()
+        {
             for (int i = 0; i < count; i++)
             {
-                arr[(i*2)] = oldArr[i];
-                arr[(i*2)+1] = secondArr[i];
+                yield return arr[i];
             }
         }
     }

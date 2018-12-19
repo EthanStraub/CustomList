@@ -37,7 +37,7 @@ namespace CustomListTest
 
             objList.Add(exampleObj);
 
-            Assert.AreEqual(objList[0].ExampleValue, 1);
+            Assert.AreEqual(objList[0].ExampleInt, 1);
         }
 
         [TestMethod]
@@ -149,7 +149,7 @@ namespace CustomListTest
 
             objList.Remove(exampleObj3);
 
-            Assert.AreNotEqual(objList[2].ExampleValue, 3);
+            Assert.AreNotEqual(objList[2].ExampleInt, 3);
         }
 
         [TestMethod]
@@ -281,9 +281,7 @@ namespace CustomListTest
             testInts2.Add(3);
             testInts2.Add(5);
 
-            testInts1.Zip(testInts2);
-
-            zipListString = testInts1.ToString();
+            zipListString = testInts1.Zip(testInts2).ToString();
             Assert.AreEqual(zipListString, "2, 9, 6, 3, 4, 5");
         }
     }
