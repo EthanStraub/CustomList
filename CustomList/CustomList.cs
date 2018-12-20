@@ -41,29 +41,46 @@ namespace CustomListProgram
         public void Remove(T item)
         {
             int foundIndex = count;
-            
+            bool doesRemove = false;
 
             for (int i = 0; i < count; i++)
             {
                 if (arr[i].Equals(item)) 
                 {
                     foundIndex = i;
+                    doesRemove = true;
+                    break;
                 }
-            }
+            }  
 
-            for (int i = foundIndex; i < count; i++)
+            if (doesRemove)
             {
-                arr[i] = arr[i + 1];
+                if (count == capacity)
+                {
+                    for (int i = foundIndex; i < count - 1; i++)
+                    {
+                        arr[i] = arr[i + 1];
+                    }
+                    arr[count - 1] = default(T);
+                }
+                else
+                {
+                    for (int i = foundIndex; i < count; i++)
+                    {
+                        arr[i] = arr[i + 1];
+                    }
+                    arr[count] = default(T);
+                }
+                count--;
+                if (count == (capacity / 2))
+                {
+                    Shrink();
+                }
+                doesRemove = false;
             }
-
-            arr[count] = default(T);
 
             
-            count--;
-            if (count == (capacity / 2))
-            {
-                Shrink();
-            }
+
         }
 
         public override string ToString()
@@ -112,6 +129,24 @@ namespace CustomListProgram
                 concatList.Add(List2[i]);
             }
             return concatList;
+        }
+
+        public static CustomList<T> operator -(CustomList<T> List1, CustomList<T> List2)
+        {
+            CustomList<T> filteredList = new CustomList<T>();
+            for (int i = 0; i < (List2.count); i++)
+            {
+                for (int j = 0; j < (List1.count); j++)
+                {
+                    if (List2[i].Equals(List1[j]))
+                    {
+                        List1.Remove(List2[i]);
+                        break;
+                    }
+                }
+            }
+            filteredList = List1;
+            return filteredList;
         }
 
         public CustomList<T> Zip(CustomList<T> secondArr)

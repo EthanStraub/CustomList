@@ -1,0 +1,54 @@
+============================
+CustomList<T> minus Operator
+============================
+The minus operator "-" removes the first instance of matching list entries. The list entries are determined by what lists the operator happens to be using.
+
+-------------------------
+  List1 = List1 - List2
+-------------------------
+
+Parameters
+==========
+
+public static CustomList<T> operator -(CustomList<T> List1, CustomList<T> List2)
+
+==========
+The line of code above shows that the minus operator requires two lists (which the function knows as "List1" and "List2", respectively) in order to fill the required parameters. Both of them must be custom lists.
+
+
+Syntax
+==========
+
+ExampleList3 = ExampleList1 - ExampleList2;
+
+ExampleList5 -= ExampleList4;
+
+==========
+The necessary syntax merely ivolves placing the operator symbol inbetween two lists as if you were subtracting integers from one another. Additionally, "-=" may also be used for shorthand subtraction, just as with normal integers.
+
+
+Return Type
+==========
+
+return filteredList;
+
+==========
+
+The minus operator overload method returns a filtered list, appropriately named "filteredList". The type of this filtered list is a custom list. If an item could not successfully be removed from a list, then "filteredList" will return the same list it was given in the form of "List1". Additionally, if an item *can* be removed from a list, then the first instance will be deleted. 
+
+An example of this is if a custom list contains four values of "5" and then a value of "1". Upon being subtracted by a second list with three values of "1" and one value of "6", only the single value of "1" in the first list will be removed, leaving behind a list with four values of "5".
+
+------------------------------------------------------------------------
+CustomList<int> intTest1 = new CustomList<int>(){5,5,5,5,1};
+CustomList<int> intTest2 = new CustomList<int>(){1,1,1,6};
+
+intTest1 -= intTest2;
+
+Console.WriteLine(intTest1);
+
+Console.ReadLine();
+
+//result is "5, 5, 5, 5"
+------------------------------------------------------------------------
+
+The minus operator is not exclusive to just custom lists that hold integers, and will in fact work even if the user is adding values to a list with the Add() method or by zipping another list to itself with the Zip() method.

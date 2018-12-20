@@ -12,16 +12,13 @@ namespace CustomListProgram
         {
 
 
-            ExampleClass Example1 = new ExampleClass(1, "HELLO");
-            ExampleClass Example2 = new ExampleClass(2, "WORLD");
+            CustomList<int> intTest1 = new CustomList<int>() { 5, 5, 5, 5, 1 };
+            CustomList<int> intTest2 = new CustomList<int>() { 1, 1, 1, 6 };
 
-            CustomList<ExampleClass> exampleList1 = new CustomList<ExampleClass>();
-            CustomList<ExampleClass> exampleList2 = new CustomList<ExampleClass>();
+            intTest1 -= intTest2;
 
-            exampleList1.Add(Example1);
-            exampleList2.Add(Example2);
-            
-            Console.WriteLine(exampleList1.Zip(exampleList2));
+            Console.WriteLine(intTest1);
+
 
             Console.ReadLine();
         }
